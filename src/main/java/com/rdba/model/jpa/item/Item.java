@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Table(name = "item", schema = "public")
 @Entity
@@ -40,5 +41,19 @@ public class Item extends AbstractItem {
     public Item(String iname, String serialNumber) {
         this.iname = iname;
         this.serialNumber = serialNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item)) return false;
+        Item item = (Item) o;
+        return Objects.equals(iname, item.iname) &&
+                Objects.equals(serialNumber, item.serialNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(iname, serialNumber);
     }
 }
