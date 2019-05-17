@@ -9,6 +9,7 @@ import com.rdba.model.jpa.item.Item;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @NamedQueries({
         @NamedQuery(
@@ -87,5 +88,21 @@ public class Order extends AbstractOrder implements Serializable {
         stringBuilder.append("Order ID: ").append(getId()).append(".")
                 .append(" Description: ").append(description).append(".");
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order)) return false;
+        Order order = (Order) o;
+        return Objects.equals(date, order.date) &&
+                Objects.equals(client, order.client) &&
+                Objects.equals(item, order.item) &&
+                Objects.equals(description, order.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, client, item, description);
     }
 }
