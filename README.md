@@ -12,6 +12,7 @@ Using:
 * Jackson
 
 SQL script for init db [here](https://github.com/ykazlovich/RDBAC/blob/master/src/main/resources/db/database.sql)
+You need to change db password in config files
 
 Frontside:
 <a href="https://github.com/ykazlovich/RDBA-web">RDBA-web</a> - with React / Boostrap
