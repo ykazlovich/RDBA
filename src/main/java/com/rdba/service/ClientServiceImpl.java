@@ -13,6 +13,10 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private ClientRepository repository;
 
+    @Override
+    public List<Client> findByNameOrPhone(String text) {
+        return repository.findByNameOrPhone(text);
+    }
 
     @Override
     public Client get(int id) {

@@ -8,5 +8,6 @@ public interface ClientService {
     Client get(int id);
     List<Client> getAll();
     Client save(Client client);
+    List<Client> findByNameOrPhone(String text);
 
 }
