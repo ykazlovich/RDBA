@@ -12,4 +12,6 @@ public interface ClientRepository {
 
     Client save(Client client);
 
+    List<Client> findByNameOrPhone(String text);
+
 }

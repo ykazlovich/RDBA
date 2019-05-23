@@ -3,6 +3,7 @@ package com.rdba.repository.hibernate;
 import com.rdba.repository.ClientRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.rdba.model.jpa.client.Client;
@@ -24,6 +25,25 @@ public class ClientRepositoryImpl implements ClientRepository {
     public Client get(int id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Client.class, id);
+    }
+
+    @Override
+    public List<Client> findByNameOrPhone(String text) {
+        String searchPattern = "%" + text + "%";
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+
+        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
+
+        Root<Client> clientRoot = cq.from(Client.class);
+        cq
+                .select(clientRoot)
+
+                .where(cb
+                        .like(clientRoot.get("name"), searchPattern))
+                .where(cb
+                        .like(clientRoot.get("phone"), searchPattern));
+        return session.createQuery(cq).getResultList();
     }
 
     @Override

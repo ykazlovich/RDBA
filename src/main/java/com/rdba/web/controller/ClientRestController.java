@@ -15,10 +15,15 @@ public class ClientRestController {
     @Autowired
     private ClientService service;
 
-    @GetMapping
-    @CrossOrigin
+    @GetMapping("/")
     public List<Client> getAllClient(){
         return service.getAll();
+    }
+
+    @GetMapping()
+    public List<Client> findByNameOrPhone(@RequestParam(name = "search") String text){
+
+        return service.findByNameOrPhone(text);
     }
 
     @GetMapping(value = "/{id}")
