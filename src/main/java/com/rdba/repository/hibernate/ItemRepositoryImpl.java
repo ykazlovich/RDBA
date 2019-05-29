@@ -3,6 +3,7 @@ package com.rdba.repository.hibernate;
 import com.rdba.repository.ItemRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.rdba.model.jpa.item.Item;
@@ -25,6 +26,14 @@ public class ItemRepositoryImpl implements ItemRepository {
         Session session = sessionFactory.getCurrentSession();
         Item item = session.get(Item.class, id);
         return item;
+    }
+
+    @Override
+    public List<Item> findByModelOrSerialNumber(String search) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Item> namedQuery = session.createNamedQuery(Item.FIND_BY_MODEL_OR_SN, Item.class);
+        namedQuery.setParameter("text", "%" + search + "%");
+        return namedQuery.getResultList();
     }
 
     @Override

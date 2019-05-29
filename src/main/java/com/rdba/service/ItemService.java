@@ -8,4 +8,5 @@ public interface ItemService {
     Item getById(int id);
     Item save(Item item);
     List<Item> getAllItem();
+    List<Item> findByModelOrSerialNumber(String search);
 }

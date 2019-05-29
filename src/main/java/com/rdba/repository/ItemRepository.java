@@ -12,4 +12,6 @@ public interface ItemRepository {
 
     List<Item> getAllItem();
 
+    List<Item> findByModelOrSerialNumber(String search);
+
 }

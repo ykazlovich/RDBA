@@ -22,9 +22,22 @@ public class ItemRestController {
         return listItems;
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public Item save(@RequestBody Item item){
         return service.save(item);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            path = "/ee"
+    )
+    public List<Item> findByModelOrSerialNumber(@RequestParam(value = "search") String search){
+        return service.findByModelOrSerialNumber(search);
     }
 
 
