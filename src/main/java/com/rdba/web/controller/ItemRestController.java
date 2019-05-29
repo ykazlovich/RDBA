@@ -16,8 +16,12 @@ public class ItemRestController {
     @Autowired
     private ItemService service;
 
-    @GetMapping
-    public List<Item> getAllItem(){
+    @RequestMapping(
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            path = "/"
+    )
+    public List<Item> getAllItem() {
         List<Item> listItems = service.getAllItem();
         return listItems;
     }
@@ -27,19 +31,17 @@ public class ItemRestController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Item save(@RequestBody Item item){
+    public Item save(@RequestBody Item item) {
         return service.save(item);
     }
 
     @RequestMapping(
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            path = "/ee"
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<Item> findByModelOrSerialNumber(@RequestParam(value = "search") String search){
+    public List<Item> findByModelOrSerialNumber(@RequestParam(value = "search") String search) {
         return service.findByModelOrSerialNumber(search);
     }
-
 
 
 }
