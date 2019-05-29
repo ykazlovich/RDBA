@@ -12,9 +12,10 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(
                 name = "Item.findByModelOrSerialNumber",
-                query = "SELECT i FROM Item i WHERE i.serialno like :text")
+                query = "from Item where lower(serialno) like lower(:text) or lower(iname) like lower(:text)")
 })
 public class Item extends AbstractItem {
+
     public static final String FIND_BY_MODEL_OR_SN = "Item.findByModelOrSerialNumber";
 
     @Column(name = "iname")

@@ -32,7 +32,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     public List<Item> findByModelOrSerialNumber(String search) {
         Session session = sessionFactory.getCurrentSession();
         Query<Item> namedQuery = session.createNamedQuery(Item.FIND_BY_MODEL_OR_SN, Item.class);
-        namedQuery.setParameter("text", "%" + "183194" + "%");
+        namedQuery.setParameter("text", "%" + search + "%");
         return namedQuery.getResultList();
     }
 
