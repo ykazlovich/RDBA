@@ -14,6 +14,11 @@ public class ItemServiceImpl implements ItemService {
     private ItemRepository repository;
 
     @Override
+    public List<Item> findByModelOrSerialNumber(String search) {
+        return repository.findByModelOrSerialNumber(search);
+    }
+
+    @Override
     public List<Item> getAllItem() {
         return repository.getAllItem();
     }

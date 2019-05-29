@@ -3,14 +3,19 @@ package com.rdba.model.jpa.item;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 @Table(name = "item", schema = "public")
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "Item.findByModelOrSerialNumber",
+                query = "SELECT i FROM Item i WHERE i.serialno like :text")
+})
 public class Item extends AbstractItem {
+    public static final String FIND_BY_MODEL_OR_SN = "Item.findByModelOrSerialNumber";
 
     @Column(name = "iname")
     private String iname;

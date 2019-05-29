@@ -27,6 +27,11 @@ public class ItemRestController {
         return service.save(item);
     }
 
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, path = "/ee")
+    public List<Item> findByModelOrSerialNumber(String search){
+        return service.findByModelOrSerialNumber(search);
+    }
+
 
 
 }
