@@ -37,7 +37,11 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public Order saveOrder(Order order) {
         Session session = sessionFactory.getCurrentSession();
-        session.persist(order);
+        if (order.isNew()) {
+            session.persist(order);
+        } else {
+            session.merge(order);
+        }
         return order;
     }
 
@@ -51,7 +55,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         session.close();
     }
 
-   @Override
+    @Override
     public List<Order> getAllOrder() {
         Session session = sessionFactory.getCurrentSession();
         //String queryName = "Order.getAll";
