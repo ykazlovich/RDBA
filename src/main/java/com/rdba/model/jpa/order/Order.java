@@ -101,6 +101,10 @@ public class Order extends AbstractOrder implements Serializable {
                 Objects.equals(description, order.description);
     }
 
+    public boolean isNew(){
+        return this.getId() == null;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(date, client, item, description);
