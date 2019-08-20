@@ -42,7 +42,7 @@ public class Order extends AbstractOrder implements Serializable {
     public Order() {
     }
 
-    public Order(Integer id, String description, Item item) {
+    public Order(Long id, String description, Item item) {
         this.description = description;
         this.item = item;
         super.setId(id);
